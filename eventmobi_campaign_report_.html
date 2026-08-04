@@ -1,0 +1,2522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EventMobi Growth Program — Campaign Performance Report</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+  :root {
+    --navy: #0F1F4A;
+    --navy-light: #1A2F6B;
+    --blue: #1D4ED8;
+    --blue-mid: #3B82F6;
+    --sky: #E8F0FE;
+    --pastel-blue: #BFDBFE;
+    --pastel-blue2: #93C5FD;
+    --pastel-blue3: #60A5FA;
+    --pastel-indigo: #C7D2FE;
+    --pastel-amber: #FDE68A;
+    --pastel-teal: #99F6E4;
+    --pastel-pink: #FBCFE8;
+    --pastel-grey: #E2E8F0;
+    --pagebg: #F7F9FC;
+    --white: #FFFFFF;
+    --border: #E6EAF2;
+    --border-dark: #CBD5E1;
+    --heading: #0F1F4A;
+    --body: #3D4A5C;
+    --muted: #7A8699;
+    --green: #059669;
+    --green-light: #D1FAE5;
+    --green-text: #065F46;
+    --amber: #B45309;
+    --amber-bg: #FEF3C7;
+    --amber-brand: #F5A623;
+    --red: #DC2626;
+    --red-light: #FEE2E2;
+    --red-text: #991B1B;
+    --shadow-sm: 0 1px 2px rgba(15,31,74,0.04);
+    --shadow-md: 0 4px 16px rgba(15,31,74,0.06), 0 1px 3px rgba(15,31,74,0.04);
+    --shadow-lg: 0 12px 40px rgba(15,31,74,0.08), 0 4px 12px rgba(15,31,74,0.04);
+    --r: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background:
+      radial-gradient(1200px 500px at 10% -10%, rgba(29,78,216,0.07), transparent 55%),
+      radial-gradient(900px 400px at 90% 0%, rgba(245,166,35,0.06), transparent 50%),
+      linear-gradient(180deg, #EEF2F8 0%, #F7F9FC 280px, #F4F6FA 100%);
+    color: var(--body);
+    padding: 36px 24px 48px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+  }
+
+  .em-report {
+    max-width: 1480px;
+    margin: 0 auto;
+    background: var(--white);
+    border: 1px solid rgba(15,31,74,0.06);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .em-header {
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(243,247,255,0.98) 100%);
+    padding: 26px 40px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .em-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--navy) 0%, var(--blue) 50%, var(--amber-brand) 100%);
+  }
+
+  .em-header::after {
+    content: '';
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(29,78,216,0.06), transparent 70%);
+    pointer-events: none;
+  }
+
+  .em-header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 24px;
+  }
+
+  .em-logos {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+
+  .em-logo-nexuses {
+    height: 26px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .em-logo-divider {
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(180deg, transparent, var(--border-dark), transparent);
+  }
+
+  .em-brand-sub {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    white-space: nowrap;
+    font-weight: 600;
+  }
+
+  .em-logo-eventmobi {
+    height: 26px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .em-header-title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+  }
+
+  .em-header-title-copy { text-align: right; }
+
+  .em-header-title h1 {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--heading);
+    letter-spacing: -0.35px;
+    line-height: 1.25;
+  }
+
+  .em-header-title p {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  .em-header-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .em-header-badge img {
+    height: 22px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  .em-header-badge .dot {
+    width: 6px; height: 6px;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.45; }
+  }
+
+  .em-tabs-wrap {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 0 rgba(15,31,74,0.03);
+  }
+
+  .em-tabs {
+    display: flex;
+    gap: 4px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 36px;
+  }
+
+  .em-tab {
+    padding: 15px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    color: var(--muted);
+    cursor: pointer;
+    border: none;
+    background: none;
+    border-bottom: 2.5px solid transparent;
+    transition: color 0.2s, background 0.2s, border-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .em-tab:hover {
+    color: var(--navy);
+    background: rgba(15,31,74,0.03);
+  }
+
+  .em-tab.active {
+    color: var(--blue);
+    border-bottom-color: var(--blue);
+    background: transparent;
+  }
+
+  .em-tab svg {
+    width: 15px; height: 15px;
+    opacity: 0.7;
+  }
+  .em-tab.active svg { opacity: 1; }
+
+  .em-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 40px 44px;
+    background: linear-gradient(180deg, #FAFBFD 0%, var(--white) 120px);
+  }
+
+  .em-panel { display: none; }
+  .em-panel.active {
+    display: block;
+    animation: fadeIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .em-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .em-kpi {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 22px 14px 18px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .em-kpi:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(29,78,216,0.18);
+  }
+
+  .em-kpi::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--navy), var(--blue-mid));
+  }
+
+  .em-kpi-icon {
+    width: 40px; height: 40px;
+    margin: 0 auto 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+  }
+
+  .em-kpi-icon.blue { background: var(--sky); color: var(--blue); }
+  .em-kpi-icon.green { background: var(--green-light); color: var(--green); }
+  .em-kpi-icon.amber { background: var(--amber-bg); color: var(--amber); }
+  .em-kpi-icon.purple { background: #EEF2FF; color: #4338CA; }
+  .em-kpi-icon.teal { background: #CCFBF1; color: #0F766E; }
+  .em-kpi-icon.pink { background: #FCE7F3; color: #BE185D; }
+
+  .em-kpi-num {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.1;
+    letter-spacing: -0.6px;
+  }
+
+  .em-kpi-lbl {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.55px;
+    margin-top: 7px;
+    font-weight: 700;
+  }
+
+  .em-kpi-change {
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 6px;
+  }
+  .em-kpi-change.up { color: var(--green); }
+  .em-kpi-change.down { color: var(--red); }
+
+  .em-section {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 26px 28px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s ease;
+  }
+
+  .em-section:hover { box-shadow: var(--shadow-md); }
+
+  .em-section-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: -0.2px;
+  }
+
+  .em-section-title .icon {
+    width: 20px; height: 20px;
+    color: var(--blue);
+    flex-shrink: 0;
+  }
+
+  .em-section-title .tag {
+    margin-left: auto;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 11px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .em-section-title .tag.green { background: var(--green-light); color: var(--green-text); }
+  .em-section-title .tag.blue { background: var(--sky); color: var(--blue); }
+  .em-section-title .tag.amber { background: var(--amber-bg); color: var(--amber); }
+  .em-section-title .tag.done { background: var(--green-light); color: var(--green-text); }
+  .em-section-title .tag.ready { background: var(--sky); color: var(--blue); }
+
+  .em-chart-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+
+  .em-chart-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+
+  .em-bar-chart { padding: 6px 0; }
+
+  .em-bar-row {
+    display: grid;
+    grid-template-columns: 92px 1fr;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .em-bar-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--body);
+    text-align: right;
+  }
+
+  .em-bar-pair {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .em-bar-track {
+    background: #F1F4F9;
+    border-radius: 9px;
+    height: 30px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .em-bar-fill {
+    height: 100%;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .em-bar-fill.pre {
+    background: linear-gradient(90deg, #93C5FD, #60A5FA);
+    color: var(--navy);
+  }
+  .em-bar-fill.post {
+    background: linear-gradient(90deg, #1D4ED8, #3B82F6);
+    color: #fff;
+  }
+
+  .em-bar-legend {
+    display: flex;
+    gap: 22px;
+    margin-bottom: 16px;
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .em-bar-legend span {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .em-legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 3px;
+  }
+
+  .em-rings {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .em-ring-item {
+    text-align: center;
+    padding: 18px 12px;
+    background: linear-gradient(180deg, #F8FAFC, #F1F5F9);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+  }
+
+  .em-ring-svg {
+    width: 92px; height: 92px;
+    margin: 0 auto 10px;
+  }
+
+  .em-ring-val {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--navy);
+  }
+
+  .em-ring-lbl {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+  .em-ring-phase {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 2px;
+    font-weight: 500;
+  }
+
+  .em-table-wrap {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+
+  .em-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+
+  .em-table th {
+    text-align: left;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.55px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 700;
+    background: linear-gradient(180deg, #F8FAFC, #F1F5F9);
+    white-space: nowrap;
+  }
+
+  .em-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #EEF1F6;
+    color: var(--body);
+    vertical-align: middle;
+  }
+
+  .em-table tbody tr {
+    transition: background 0.15s ease;
+  }
+
+  .em-table tr:hover td { background: #F8FAFD; }
+  .em-table tr:last-child td { border-bottom: none; }
+
+  .em-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+  }
+
+  .em-tag.done { background: var(--green-light); color: var(--green-text); }
+  .em-tag.active { background: var(--amber-bg); color: var(--amber); }
+  .em-tag.ready { background: var(--sky); color: var(--blue); }
+  .em-tag.process { background: #EEF2FF; color: #4338CA; }
+
+  .em-tag .dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+  }
+  .em-tag.done .dot { background: var(--green); }
+  .em-tag.active .dot { background: var(--amber); animation: pulse 2s infinite; }
+  .em-tag.ready .dot { background: var(--blue); }
+
+  .em-link {
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    transition: color 0.15s;
+  }
+  .em-link:hover { color: var(--navy); text-decoration: underline; }
+
+  .em-funnel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 0;
+  }
+
+  .em-funnel-stage {
+    position: relative;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 13px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: default;
+    box-shadow: 0 2px 8px rgba(15,31,74,0.08);
+  }
+
+  .em-funnel-stage:hover {
+    transform: scale(1.015);
+    box-shadow: 0 6px 16px rgba(15,31,74,0.12);
+  }
+
+  .em-funnel-stage small {
+    display: block;
+    font-weight: 500;
+    font-size: 10px;
+    opacity: 0.88;
+    margin-top: 2px;
+  }
+
+  .em-funnel-connector {
+    width: 2px;
+    height: 7px;
+    background: var(--border-dark);
+    border-radius: 2px;
+  }
+
+  .em-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .em-card {
+    background: linear-gradient(180deg, #FFFFFF, #F8FAFC);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .em-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .em-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    gap: 10px;
+  }
+
+  .em-card-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--heading);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: -0.15px;
+  }
+
+  .em-card-name .icon { width: 18px; height: 18px; color: var(--blue); }
+
+  .em-card-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 14px 0;
+  }
+
+  .em-card-stat {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 12px 8px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+
+  .em-card-stat .n { font-size: 18px; font-weight: 800; color: var(--navy); letter-spacing: -0.3px; }
+  .em-card-stat .l {
+    font-size: 9px; color: var(--muted); text-transform: uppercase;
+    margin-top: 3px; font-weight: 700; letter-spacing: 0.35px;
+  }
+
+  .em-card-list {
+    font-size: 12.5px;
+    color: var(--body);
+    line-height: 1.9;
+  }
+
+  .em-card-list .check {
+    color: var(--green);
+    margin-right: 6px;
+    font-weight: 700;
+  }
+
+  .em-lead-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .em-lead-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .em-lead-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+
+  .em-lead-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+  }
+
+  .em-lead-card.sql::before { background: linear-gradient(180deg, #059669, #34D399); }
+  .em-lead-card.warm::before { background: linear-gradient(180deg, #DB2777, #F472B6); }
+
+  .em-lead-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.2px;
+  }
+
+  .em-lead-role {
+    font-size: 11.5px;
+    color: var(--muted);
+    margin: 4px 0 10px;
+    font-weight: 500;
+  }
+
+  .em-lead-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 11px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+  }
+
+  .em-lead-status.sql { background: var(--green-light); color: var(--green-text); }
+  .em-lead-status.warm { background: #FCE7F3; color: #BE185D; }
+
+  .em-lead-meta {
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    line-height: 1.55;
+  }
+
+  .em-asset-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  .em-asset-tile {
+    background: linear-gradient(180deg, #FFFFFF, #F8FAFC);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 12px;
+    text-align: center;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .em-asset-tile:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(29,78,216,0.22);
+  }
+
+  .em-asset-icon {
+    width: 42px; height: 42px;
+    margin: 0 auto 10px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .em-asset-n {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: -0.4px;
+  }
+
+  .em-asset-t {
+    font-size: 9.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.45px;
+    margin-top: 4px;
+    font-weight: 700;
+  }
+
+  .em-stack-bar {
+    display: flex;
+    height: 38px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 18px 0 14px;
+    border: 1px solid var(--border);
+    box-shadow: inset 0 1px 2px rgba(15,31,74,0.04);
+  }
+
+  .em-stack-seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--navy);
+    transition: filter 0.2s;
+  }
+
+  .em-stack-seg:hover { filter: brightness(1.04); }
+
+  .em-data-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .em-data-stat {
+    background: linear-gradient(180deg, #FFFFFF, #F8FAFC);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    text-align: center;
+    padding: 20px 12px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .em-data-stat:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .em-total-banner {
+    text-align: center;
+    background: linear-gradient(135deg, var(--navy) 0%, #1A3A8A 55%, var(--blue) 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    box-shadow: 0 6px 18px rgba(15,31,74,0.2);
+  }
+
+  .em-data-stat .icon {
+    width: 28px; height: 28px;
+    margin: 0 auto 10px;
+    color: var(--blue);
+  }
+
+  .em-data-stat .n,
+  .em-data-stat-n {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: -0.4px;
+  }
+
+  .em-data-stat .l,
+  .em-data-stat-l {
+    font-size: 9.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 5px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+  }
+
+  .em-chip-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .em-chip {
+    background: linear-gradient(180deg, #FFFFFF, #F8FAFC);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .em-chip:hover {
+    border-color: rgba(29,78,216,0.2);
+    box-shadow: var(--shadow-md);
+  }
+
+  .em-chip-icon {
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    background: var(--sky);
+    color: var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .em-chip b {
+    display: block;
+    font-size: 13px;
+    color: var(--heading);
+    margin-bottom: 3px;
+    letter-spacing: -0.1px;
+  }
+
+  .em-chip span {
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+
+  .em-dashboard-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+    color: #fff;
+    padding: 13px 26px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.1px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 6px 18px rgba(29,78,216,0.28);
+  }
+
+  .em-dashboard-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(29,78,216,0.35);
+    color: #fff;
+  }
+
+  .em-callout {
+    background: linear-gradient(135deg, #F0F6FF, #E8F0FE);
+    border: 1px solid #BFDBFE;
+    border-left: 3px solid var(--blue);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 12.5px;
+    color: var(--body);
+    line-height: 1.65;
+    margin-top: 14px;
+  }
+
+  .em-callout b { color: var(--navy); }
+
+  .em-callout.green {
+    background: linear-gradient(135deg, #F0FDF4, #DCFCE7);
+    border-color: #86EFAC;
+    border-left-color: var(--green);
+  }
+
+  .em-callout.amber {
+    background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+    border-color: #FCD34D;
+    border-left-color: var(--amber);
+  }
+
+  .em-footer {
+    text-align: center;
+    font-size: 11px;
+    color: #94A3B8;
+    padding: 22px 20px;
+    border-top: 1px solid var(--border);
+    background: linear-gradient(180deg, #FAFBFD, #F5F7FB);
+    font-weight: 500;
+  }
+
+  .em-month-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-left: 2px;
+  }
+
+  .em-month-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .em-month-select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: var(--navy);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 9px 34px 9px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: inherit;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    min-width: 132px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23F5A623' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    box-shadow: 0 4px 12px rgba(15,31,74,0.22);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .em-month-select:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(15,31,74,0.28);
+  }
+
+  .em-month-select:focus {
+    outline: 2px solid var(--amber-brand);
+    outline-offset: 2px;
+  }
+
+  .em-month-select option {
+    background: var(--navy);
+    color: #fff;
+  }
+
+  .month-block { display: none !important; }
+  .month-block.is-active { display: block !important; }
+  .month-inline { display: none !important; }
+  .month-inline.is-active { display: inline !important; }
+  .month-flex { display: none !important; }
+  .month-flex.is-active { display: flex !important; }
+  .month-grid { display: none !important; }
+  .month-grid.is-active { display: grid !important; }
+  tr.month-row { display: none !important; }
+  tr.month-row.is-active { display: table-row !important; }
+
+  .em-table-wrap::-webkit-scrollbar { height: 6px; }
+  .em-table-wrap::-webkit-scrollbar-track { background: var(--pagebg); border-radius: 3px; }
+  .em-table-wrap::-webkit-scrollbar-thumb { background: #C5CDD8; border-radius: 3px; }
+
+  @media (max-width: 1200px) {
+    .em-kpi-grid { grid-template-columns: repeat(3, 1fr); }
+    .em-chart-grid { grid-template-columns: 1fr; }
+    .em-chart-grid-2 { grid-template-columns: 1fr; }
+    .em-card-grid { grid-template-columns: 1fr; }
+    .em-asset-grid { grid-template-columns: repeat(2, 1fr); }
+    .em-data-stats { grid-template-columns: repeat(2, 1fr); }
+    .em-lead-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    body { padding: 14px 10px 28px; }
+    .em-header { padding: 20px 16px; }
+    .em-header-inner { flex-direction: column; gap: 16px; text-align: center; }
+    .em-logos { justify-content: center; flex-wrap: wrap; }
+    .em-header-title { flex-direction: column; text-align: center; }
+    .em-header-title-copy { text-align: center; }
+    .em-tabs { overflow-x: auto; padding: 0 12px; gap: 0; }
+    .em-tab { padding: 13px 14px; font-size: 12px; }
+    .em-content { padding: 18px 14px 28px; }
+    .em-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .em-data-stats { grid-template-columns: 1fr; }
+    .em-chip-row { grid-template-columns: 1fr; }
+    .em-asset-grid { grid-template-columns: 1fr; }
+    .em-section { padding: 18px 16px; }
+    .em-month-wrap { align-items: center; margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="em-report">
+  <div class="em-header">
+    <div class="em-header-inner">
+      <div class="em-logos">
+        <img class="em-logo-nexuses" src="https://eventmobi.s3.us-east-2.amazonaws.com/log3__1__1783958594874_gm6x.png" alt="Nexuses" onerror="this.style.display='none'">
+        <div class="em-logo-divider"></div>
+        <div class="em-month-wrap">
+          <div class="em-month-label">Reporting month</div>
+          <select id="monthSelect" class="em-month-select" aria-label="Select reporting month">
+            <option value="june">June 2026</option>
+            <option value="july">July 2026</option>
+          </select>
+        </div>
+      </div>
+      <div class="em-header-title">
+        <div class="em-header-title-copy">
+          <h1>EventMobi Growth Program — Campaign Performance Report</h1>
+          <p class="month-inline is-active" data-month="june">Full-program overview &middot; June 2026 &middot; Confidential, prepared for client reporting</p>
+          <p class="month-inline" data-month="july">Full-program overview &middot; July 2026 &middot; Confidential, prepared for client reporting</p>
+        </div>
+        <div class="em-header-badge">
+          <img class="em-logo-eventmobi" src="https://eventmobi.s3.us-east-2.amazonaws.com/image__45_-removebg-preview_1783958612784_0c7m.png" alt="EventMobi" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="em-tabs-wrap">
+    <div class="em-tabs">
+      <button class="em-tab active" onclick="switchTab('overview')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        Overview
+      </button>
+      <button class="em-tab" onclick="switchTab('performance')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+        Performance
+      </button>
+      <button class="em-tab" onclick="switchTab('campaigns')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        Campaigns
+      </button>
+      <button class="em-tab" onclick="switchTab('assets')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+        Assets
+      </button>
+      <button class="em-tab" onclick="switchTab('data')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
+        Data & Prospecting
+      </button>
+      <button class="em-tab" onclick="switchTab('pipeline')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.5"/><circle cx="12" cy="12" r="2"/></svg>
+        Pipeline
+      </button>
+    </div>
+  </div>
+
+  <div class="em-content">
+
+    <!-- OVERVIEW TAB -->
+    <div id="overview" class="em-panel active">
+      
+
+      <div class="em-kpi-grid month-grid is-active" data-month="june">
+        <div class="em-kpi">
+          <div class="em-kpi-icon blue">&#128227;</div>
+          <div class="em-kpi-num">23</div>
+          <div class="em-kpi-lbl">Campaigns Executed</div>
+        </div>
+        <div class="em-kpi">
+          <div class="em-kpi-icon purple">&#127912;</div>
+          <div class="em-kpi-num">38</div>
+          <div class="em-kpi-lbl">Assets Created</div>
+        </div>
+        <div class="em-kpi">
+          <div class="em-kpi-icon teal">&#128231;</div>
+          <div class="em-kpi-num">8,447</div>
+          <div class="em-kpi-lbl">Emails Delivered</div>
+        </div>
+        <div class="em-kpi">
+          <div class="em-kpi-icon green">&#128200;</div>
+          <div class="em-kpi-num">41.2%</div>
+          <div class="em-kpi-lbl">Open Rate</div>
+          <div class="em-kpi-change up">&#8593; Post: 41.9%</div>
+        </div>
+        <div class="em-kpi">
+          <div class="em-kpi-icon amber">&#127919;</div>
+          <div class="em-kpi-num">11.9%</div>
+          <div class="em-kpi-lbl">Click Rate</div>
+          <div class="em-kpi-change up">&#8593; Post: 14.2%</div>
+        </div>
+        <div class="em-kpi">
+          <div class="em-kpi-icon pink">&#127942;</div>
+          <div class="em-kpi-num">1 SQL</div>
+          <div class="em-kpi-lbl">Meeting Done</div>
+          <div class="em-kpi-change up">+ 2 Warm Leads</div>
+        </div>
+      </div>
+
+      <div class="em-kpi-grid month-grid" data-month="july">
+        <div class="em-kpi">
+          <div class="em-kpi-icon blue">&#128227;</div>
+          <div class="em-kpi-num">28</div>
+          <div class="em-kpi-lbl">Campaigns Executed</div>
+        </div>
+        <div class="em-kpi">
+          <div class="em-kpi-icon purple">&#127912;</div>
+          <div class="em-kpi-num">52</div>
+          <div class="em-kpi-lbl">Assets Created</div>
+        </div>
+        <div class="em-kpi">
+          <div class="em-kpi-icon teal">&#128231;</div>
+          <div class="em-kpi-num">10,815</div>
+          <div class="em-kpi-lbl">Emails Delivered</div>
+        </div>
+        <div class="em-kpi">
+          <div class="em-kpi-icon green">&#128200;</div>
+          <div class="em-kpi-num">42.2%</div>
+          <div class="em-kpi-lbl">Open Rate</div>
+          <div class="em-kpi-change up">&#8593; Post: 43.1%</div>
+        </div>
+        <div class="em-kpi">
+          <div class="em-kpi-icon amber">&#127919;</div>
+          <div class="em-kpi-num">9.7%</div>
+          <div class="em-kpi-lbl">Click Rate</div>
+          <div class="em-kpi-change up">&#8593; Post: 10.5%</div>
+        </div>
+        <div class="em-kpi">
+          <div class="em-kpi-icon pink">&#127942;</div>
+          <div class="em-kpi-num">1 SQL</div>
+          <div class="em-kpi-lbl">Meeting Done</div>
+          <div class="em-kpi-change up">+ 2 MQL / Warm</div>
+        </div>
+      </div>
+
+      <div class="em-section">
+        <div class="em-section-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22V4"/><path d="M4 4h14l-2 4 2 4H4"/></svg>
+          Program Overview
+          <span class="tag green">Active</span>
+        </div>
+        <div class="em-table-wrap">
+          <table class="em-table">
+            <thead>
+              <tr><th>Initiative</th><th>Channels</th><th>Status</th><th>Key Metrics</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Pre-Webinar Invitation</b><br><span style="font-size:11px;color:var(--muted)">BadgeON&trade; Launch</span></td>
+                <td>4 EDM + 6 1:1 (&times;2 rounds)</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>2,790 delivered &middot; 39.7% open &middot; 7.2% click</td>
+              </tr>
+              <tr>
+                <td><b>Post-Webinar No-Show Follow-Up</b><br><span style="font-size:11px;color:var(--muted)">BadgeON&trade; Re-engagement</span></td>
+                <td>8 EDM + 4 1:1 + LinkedIn</td>
+                <td><span class="em-tag active"><span class="dot"></span> Active</span></td>
+                <td>5,657 delivered &middot; 41.9% open &middot; 14.2% click</td>
+              </tr>
+              <tr>
+                <td><b>EventMobi vs Whova Comparison</b><br><span style="font-size:11px;color:var(--muted)">Competitive Campaign</span></td>
+                <td>Landing page, EDM, 1:1, call</td>
+                <td><span class="em-tag active"><span class="dot"></span> Active</span></td>
+                <td>9 assets built &middot; 823 accounts &middot; 1,284 contacts</td>
+              </tr>
+              <tr>
+                <td><b>ABX Financial Services</b><br><span style="font-size:11px;color:var(--muted)">Net-New Prospecting</span></td>
+                <td>List build &rarr; 1:1 + call</td>
+                <td><span class="em-tag active"><span class="dot"></span> In Process</span></td>
+                <td>2,588 net-new contacts</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="em-callout month-block is-active" data-month="june">
+          <b>23 outbound campaigns</b> executed to date across EDM broadcast, 1:1 email and LinkedIn. Two additional initiatives &mdash; <b>Whova comparison</b> and <b>ABX net-new</b> &mdash; are staged and ready for next-phase deployment.
+        </div>
+        <div class="em-callout month-block" data-month="july">
+          <b>28 outbound campaigns</b> executed through July across EDM broadcast, 1:1 email, LinkedIn and Whova competitive. Pipeline holds <b>2 MQL</b> and <b>1 SQL</b> (Veronica Fendt demo completed Jul 15). Live metrics: <a class="em-link" href="https://eventmobi-campaign.vercel.app/" target="_blank">Campaign Dashboard &nearr;</a>
+        </div>
+      </div>
+
+      <div class="em-section">
+        <div class="em-section-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+          Assets Created <span style="margin-left:auto;font-size:12px;color:var(--muted);font-weight:500">Across BadgeON&trade; + Whova comparison programs</span>
+        </div>
+        <div class="em-asset-grid">
+          <div class="em-asset-tile">
+            <div class="em-asset-icon" style="background:var(--pastel-blue2)">&#9993;</div>
+            <div class="em-asset-n">20</div>
+            <div class="em-asset-t">Email / 1:1 Copy</div>
+          </div>
+          <div class="em-asset-tile">
+            <div class="em-asset-icon" style="background:var(--pastel-blue3)">&#128444;</div>
+            <div class="em-asset-n">8</div>
+            <div class="em-asset-t">EDM / Visual</div>
+          </div>
+          <div class="em-asset-tile">
+            <div class="em-asset-icon" style="background:var(--pastel-indigo)">&#128279;</div>
+            <div class="em-asset-n">4</div>
+            <div class="em-asset-t">LinkedIn Pitches</div>
+          </div>
+          <div class="em-asset-tile">
+            <div class="em-asset-icon" style="background:var(--pastel-amber)">&#128222;</div>
+            <div class="em-asset-n">3</div>
+            <div class="em-asset-t">Calling Scripts</div>
+          </div>
+          <div class="em-asset-tile">
+            <div class="em-asset-icon" style="background:var(--pastel-teal)">&#128202;</div>
+            <div class="em-asset-n">1</div>
+            <div class="em-asset-t">Live Dashboard</div>
+          </div>
+          <div class="em-asset-tile">
+            <div class="em-asset-icon" style="background:var(--pastel-pink)">&#127760;</div>
+            <div class="em-asset-n">1</div>
+            <div class="em-asset-t">Landing Page</div>
+          </div>
+          <div class="em-asset-tile">
+            <div class="em-asset-icon" style="background:var(--pastel-grey)">&#128196;</div>
+            <div class="em-asset-n">1</div>
+            <div class="em-asset-t">2-Pager</div>
+          </div>
+          <div class="em-asset-tile">
+            <div class="em-asset-icon" style="background:var(--pastel-blue)">&#128100;</div>
+            <div class="em-asset-n">8</div>
+            <div class="em-asset-t">Sender Signatures</div>
+          </div>
+        </div>
+        <div class="em-stack-bar">
+          <div class="em-stack-seg" style="width:52.6%;background:var(--pastel-blue2)">Email &mdash; 20</div>
+          <div class="em-stack-seg" style="width:21.1%;background:var(--pastel-blue3);color:#fff">Visual &mdash; 8</div>
+          <div class="em-stack-seg" style="width:10.5%;background:var(--pastel-indigo)">LinkedIn &mdash; 4</div>
+          <div class="em-stack-seg" style="width:7.9%;background:var(--pastel-amber)">Call &mdash; 3</div>
+          <div class="em-stack-seg" style="width:7.9%;background:var(--pastel-grey)">Other &mdash; 3</div>
+        </div>
+        <div class="em-total-banner month-block is-active" data-month="june">
+          38 Total Assets Delivered &mdash; 100% Complete
+        </div>
+        <div class="em-total-banner month-block" data-month="july">
+          52 Total Assets Delivered &mdash; 100% Complete
+        </div>
+      </div>
+    </div>
+
+    <!-- PERFORMANCE TAB -->
+    <div id="performance" class="em-panel">
+      
+
+      <div class="em-chart-grid">
+        <div class="em-section">
+          <div class="em-section-title">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            Campaign Performance <span style="margin-left:auto;font-size:12px;color:var(--muted);font-weight:500">Pre vs. Post-Webinar</span>
+          </div>
+          <div class="em-bar-legend">
+            <span><span class="em-legend-dot" style="background:var(--pastel-blue2)"></span>Pre-Webinar</span>
+            <span><span class="em-legend-dot" style="background:var(--blue)"></span>Post-Webinar</span>
+          </div>
+          <div class="em-bar-chart month-block is-active" data-month="june">
+            <div class="em-bar-row">
+              <div class="em-bar-label">Delivered</div>
+              <div class="em-bar-pair">
+                <div class="em-bar-track"><div class="em-bar-fill pre" style="width:49.3%">2,790</div></div>
+                <div class="em-bar-track"><div class="em-bar-fill post" style="width:100%">5,657</div></div>
+              </div>
+            </div>
+            <div class="em-bar-row">
+              <div class="em-bar-label">Opens</div>
+              <div class="em-bar-pair">
+                <div class="em-bar-track"><div class="em-bar-fill pre" style="width:46.8%">1,109</div></div>
+                <div class="em-bar-track"><div class="em-bar-fill post" style="width:100%">2,371</div></div>
+              </div>
+            </div>
+            <div class="em-bar-row">
+              <div class="em-bar-label">Clicks</div>
+              <div class="em-bar-pair">
+                <div class="em-bar-track"><div class="em-bar-fill pre" style="width:24.8%">200</div></div>
+                <div class="em-bar-track"><div class="em-bar-fill post" style="width:100%">806</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="em-bar-chart month-block" data-month="july">
+            <div class="em-bar-row">
+              <div class="em-bar-label">Delivered</div>
+              <div class="em-bar-pair">
+                <div class="em-bar-track"><div class="em-bar-fill pre" style="width:33.6%">2,721</div></div>
+                <div class="em-bar-track"><div class="em-bar-fill post" style="width:100%">8,094</div></div>
+              </div>
+            </div>
+            <div class="em-bar-row">
+              <div class="em-bar-label">Opens</div>
+              <div class="em-bar-pair">
+                <div class="em-bar-track"><div class="em-bar-fill pre" style="width:31.0%">1,081</div></div>
+                <div class="em-bar-track"><div class="em-bar-fill post" style="width:100%">3,487</div></div>
+              </div>
+            </div>
+            <div class="em-bar-row">
+              <div class="em-bar-label">Clicks</div>
+              <div class="em-bar-pair">
+                <div class="em-bar-track"><div class="em-bar-fill pre" style="width:23.5%">200</div></div>
+                <div class="em-bar-track"><div class="em-bar-fill post" style="width:100%">852</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="em-callout green month-block is-active" data-month="june">
+            <b>Post-webinar click rate approximately 2&times; higher than pre-webinar</b> as messaging shifted from cold EDM to a personalised no-show follow-up. Click-to-open improved from 18.0% to 34.0%.
+          </div>
+          <div class="em-callout green month-block" data-month="july">
+            <b>July cumulative: 10,815 delivered &middot; 42.2% open &middot; 9.7% click</b> across pre + post waves including EDM3 and Whova competitive sends. Post-webinar open rate 43.1% / click 10.5%.
+          </div>
+        </div>
+
+        <div class="em-section">
+          <div class="em-section-title">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.5"/><circle cx="12" cy="12" r="2"/></svg>
+            Rate Comparison
+          </div>
+          <div class="em-rings">
+            <div class="em-ring-item">
+              <svg class="em-ring-svg" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="var(--pastel-grey)" stroke-width="10"/>
+                <circle cx="50" cy="50" r="40" fill="none" stroke="var(--pastel-blue2)" stroke-width="10" stroke-dasharray="251.2" stroke-dashoffset="151.5" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+                <text x="50" y="48" text-anchor="middle" font-size="18" font-weight="800" fill="var(--navy)">39.7%</text>
+                <text x="50" y="62" text-anchor="middle" font-size="8" fill="var(--muted)">Open</text>
+              </svg>
+              <div class="em-ring-lbl">Open Rate</div>
+              <div class="em-ring-phase">Pre-Webinar</div>
+            </div>
+            <div class="em-ring-item">
+              <svg class="em-ring-svg" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="var(--pastel-grey)" stroke-width="10"/>
+                <circle cx="50" cy="50" r="40" fill="none" stroke="var(--blue)" stroke-width="10" stroke-dasharray="251.2" stroke-dashoffset="145.9" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+                <text x="50" y="48" text-anchor="middle" font-size="18" font-weight="800" fill="var(--navy)">41.9%</text>
+                <text x="50" y="62" text-anchor="middle" font-size="8" fill="var(--muted)">Open</text>
+              </svg>
+              <div class="em-ring-lbl">Open Rate</div>
+              <div class="em-ring-phase">Post-Webinar</div>
+            </div>
+            <div class="em-ring-item">
+              <svg class="em-ring-svg" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="var(--pastel-grey)" stroke-width="10"/>
+                <circle cx="50" cy="50" r="40" fill="none" stroke="var(--pastel-blue2)" stroke-width="10" stroke-dasharray="251.2" stroke-dashoffset="205.9" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+                <text x="50" y="48" text-anchor="middle" font-size="18" font-weight="800" fill="var(--navy)">7.3%</text>
+                <text x="50" y="62" text-anchor="middle" font-size="8" fill="var(--muted)">Click</text>
+              </svg>
+              <div class="em-ring-lbl">Click Rate</div>
+              <div class="em-ring-phase">Pre-Webinar</div>
+            </div>
+            <div class="em-ring-item">
+              <svg class="em-ring-svg" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="var(--pastel-grey)" stroke-width="10"/>
+                <circle cx="50" cy="50" r="40" fill="none" stroke="var(--blue)" stroke-width="10" stroke-dasharray="251.2" stroke-dashoffset="165.8" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+                <text x="50" y="48" text-anchor="middle" font-size="18" font-weight="800" fill="var(--navy)">14.2%</text>
+                <text x="50" y="62" text-anchor="middle" font-size="8" fill="var(--muted)">Click</text>
+              </svg>
+              <div class="em-ring-lbl">Click Rate</div>
+              <div class="em-ring-phase">Post-Webinar</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="em-section">
+        <div class="em-section-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          Campaign Breakdown
+        </div>
+        <div class="em-table-wrap">
+          <table class="em-table">
+            <thead>
+              <tr><th>Campaign</th><th>Type</th><th>Status</th><th>Delivered</th><th>Opens</th><th>Clicks</th><th>Open Rate</th><th>Click Rate</th><th>Report</th></tr>
+            </thead>
+            <tbody>
+              <tr style="background:var(--pagebg)"><td colspan="9" style="font-weight:700;color:var(--navy);font-size:12px">PRE-WEBINAR EDM CAMPAIGNS</td></tr>
+              <tr>
+                <td><b>EDM 1 &mdash; Visual (Client Accounts Set 1)</b><br><span style="font-size:10px;color:var(--muted)">BadgeON&trade; launch invitation</span></td>
+                <td>EDM Broadcast</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>380</td><td>128</td><td>8</td><td>33.7%</td><td>2.1%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1-J9rxcJyqnR5K25x1VjVlb8jh3TYdXP1iajyHtof6v4/edit?gid=1969803987#gid=1969803987" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>EDM 2 &mdash; Visual (Client Accounts Set 2)</b><br><span style="font-size:10px;color:var(--muted)">BadgeON&trade; launch invitation</span></td>
+                <td>EDM Broadcast</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>572</td><td>236</td><td>9</td><td>41.3%</td><td>1.6%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/10OduisOZkRBErdTsg6PB7q9qznjFt9rmDYWJDbf6w0o/edit?gid=1993196352#gid=1993196352" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>EDM 3 &mdash; Text-Based (ABX Financial)</b><br><span style="font-size:10px;color:var(--muted)">High-deliverability plain-text</span></td>
+                <td>EDM Broadcast</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>373</td><td>128</td><td>1</td><td>34.3%</td><td>0.3%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/19R598oUYmS2kMofcaQIg9JvbL1LEkxVsDPynVVVgb2o/edit?usp=sharing" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>EDM 4 &mdash; Visual Refresh (ICP Prospects)</b><br><span style="font-size:10px;color:var(--muted)">Refreshed BadgeON&trade; creative</span></td>
+                <td>EDM Broadcast</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>864</td><td>414</td><td>43</td><td>47.9%</td><td>5.0%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1V_hv67OqLPw97-yIszs35ZlSIIdZ3kgvJFx0UpJ_hyE/edit?gid=1475384866#gid=1475384866" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr style="background:var(--pagebg)"><td colspan="9" style="font-weight:700;color:var(--navy);font-size:12px">PRE-WEBINAR 1:1 CAMPAIGNS</td></tr>
+              <tr>
+                <td><b>1:1 Outreach &mdash; Set 1 (Batch A)</b><br><span style="font-size:10px;color:var(--muted)">Personalised outreach</span></td>
+                <td>1:1 Email</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>118</td><td>60</td><td>36</td><td>50.8%</td><td>30.5%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1yZYmgYx7v5lzcohzXPxsSpHQh7o5Qhpsd9k7wMfp-5o/edit?gid=1173894981#gid=1173894981" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>1:1 Outreach &mdash; Set 2 (Batch B)</b><br><span style="font-size:10px;color:var(--muted)">Personalised outreach</span></td>
+                <td>1:1 Email</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>100</td><td>25</td><td>18</td><td>25.0%</td><td>18.0%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/12-p0lH_J2RYkUljhyi76dx-uP1jz_MIm8zu-ur2i93Y/edit?gid=230173526#gid=230173526" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>1:1 Outreach &mdash; Set 3 (Batch C)</b><br><span style="font-size:10px;color:var(--muted)">Personalised outreach</span></td>
+                <td>1:1 Email</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>100</td><td>62</td><td>52</td><td>62.0%</td><td>52.0%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1kz3htB0GsGCITSgY-jCbqjEUSBh4y_bwMxXeWW4YF5g/edit?gid=225488827#gid=225488827" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>1:1 Outreach 2 &mdash; Set 1 (Batch A)</b><br><span style="font-size:10px;color:var(--muted)">Personalised outreach 2</span></td>
+                <td>1:1 Email</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>71</td><td>28</td><td>5</td><td>39.4%</td><td>7.0%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1V11KNePxCY_gyItyFW_Byo0J1DZ_oO6V6gFvJ155UAk/edit?usp=sharing" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>1:1 Outreach 2 &mdash; Set 2 (Batch B)</b><br><span style="font-size:10px;color:var(--muted)">Personalised outreach 2</span></td>
+                <td>1:1 Email</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>143</td><td>28</td><td>28</td><td>19.6%</td><td>19.6%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1Fwg5Ct2Vph5aQMim7XJqoGOica71joS_Q36LfF6Arj0/edit?usp=sharing" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr class="month-row is-active" data-month="june">
+                <td><b>1:1 Outreach 2 &mdash; Set 3 (Batch C)</b><br><span style="font-size:10px;color:var(--muted)">Personalised outreach 2</span></td>
+                <td>1:1 Email</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>69</td><td>0</td><td>0</td><td>0.0%</td><td>0.0%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1kz3htB0GsGCITSgY-jCbqjEUSBh4y_bwMxXeWW4YF5g/edit?gid=225488827#gid=225488827" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr style="background:var(--pagebg)"><td colspan="9" style="font-weight:700;color:var(--navy);font-size:12px">POST-WEBINAR EDM CAMPAIGNS</td></tr>
+              <tr>
+                <td><b>EDM &mdash; Visual (Whole Webinar SET1)</b><br><span style="font-size:10px;color:var(--muted)">Webinar No-Show Email Visual EDM1</span></td>
+                <td>EDM Broadcast</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>451</td><td>193</td><td>7</td><td>42.8%</td><td>1.6%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1IbQPj7VsErjng5kT6jEcEBxMII08pXmoF4KuH9Ymt_A/edit?usp=sharing" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>EDM &mdash; Visual (Whole Webinar SET2)</b><br><span style="font-size:10px;color:var(--muted)">Webinar No-Show Email Visual EDM1</span></td>
+                <td>EDM Broadcast</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>451</td><td>170</td><td>12</td><td>37.7%</td><td>2.7%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1xQUMCs8EF2o1p2uv0EUNqSAl1-3dkQgKa_V_spWjpoc/edit?gid=1449269366#gid=1449269366" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>EDM &mdash; Visual (Whole Webinar SET3)</b><br><span style="font-size:10px;color:var(--muted)">Webinar No-Show Email Visual EDM1</span></td>
+                <td>EDM Broadcast</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>448</td><td>165</td><td>10</td><td>36.8%</td><td>2.2%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/10fBi5grIMQvT6EGSTHn72ejyrHQrEnawSi_WyRaWIuw/edit?gid=4090877#gid=4090877" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>EDM &mdash; Visual (Whole Webinar SET4)</b><br><span style="font-size:10px;color:var(--muted)">Webinar No-Show Email Visual EDM1</span></td>
+                <td>EDM Broadcast</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>455</td><td>202</td><td>4</td><td>44.4%</td><td>0.9%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1vPKLkRsJMu8ukoYG_k3pdGR2GADM5DsHoBuzBxQHho0/edit?usp=sharing" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>EDM2 &mdash; Visual (Whole Webinar SET1)</b><br><span style="font-size:10px;color:var(--muted)">Webinar No-Show Email Visual EDM2</span></td>
+                <td>EDM Broadcast</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>446</td><td>187</td><td>56</td><td>41.9%</td><td>12.6%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1WWN_sD7o_y0MEy8QjMX7VYA0S-UtXEAzT1c9vosWBBU/edit?gid=1088990882#gid=1088990882" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>EDM2 &mdash; Visual (Whole Webinar SET2)</b><br><span style="font-size:10px;color:var(--muted)">Webinar No-Show Email Visual EDM2</span></td>
+                <td>EDM Broadcast</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>448</td><td>188</td><td>1</td><td>42.0%</td><td>0.2%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1z6qxzRU_JT3a9RaYOJzUhFLJFEpiNKA9YeJQ_LMvIag/edit?usp=sharing" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>EDM2 &mdash; Visual (Whole Webinar SET3)</b><br><span style="font-size:10px;color:var(--muted)">Webinar No-Show Email Visual EDM2</span></td>
+                <td>EDM Broadcast</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>450</td><td>170</td><td>10</td><td>37.8%</td><td>2.2%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1dGfwK6mxCCM0VkJdweXJCI03S_Waz5ZWDsp1VqBrc_k/edit?usp=sharing" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>EDM2 &mdash; Visual (Whole Webinar SET4)</b><br><span style="font-size:10px;color:var(--muted)">Webinar No-Show Email Visual EDM2</span></td>
+                <td>EDM Broadcast</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>445</td><td>220</td><td>2</td><td>49.4%</td><td>0.4%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1d8eAZllWvFb_FV_yNvR4dtdQyw6GdwhhZUZGDs5oUjg/edit?usp=sharing" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr class="month-row" data-month="july" style="background:var(--pagebg)"><td colspan="9" style="font-weight:700;color:var(--navy);font-size:12px">POST-WEBINAR EDM3 + WHOVA (JULY)</td></tr>
+              <tr class="month-row" data-month="july">
+                <td><b>EDM3 &mdash; Visual (Whole Webinar SET1)</b><br><span style="font-size:10px;color:var(--muted)">Webinar No-Show Email Visual EDM3</span></td>
+                <td>EDM Broadcast</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>445</td><td>182</td><td>17</td><td>40.9%</td><td>3.8%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1BXiAfFa__VOuahqvq8s6eFYtKV1uNyWMk0kEQhz7eOU/edit?gid=349657286#gid=349657286" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr class="month-row" data-month="july">
+                <td><b>EDM3 &mdash; Visual (Whole Webinar SET2)</b><br><span style="font-size:10px;color:var(--muted)">Webinar No-Show Email Visual EDM3</span></td>
+                <td>EDM Broadcast</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>445</td><td>189</td><td>2</td><td>42.5%</td><td>0.4%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/18V_DFgscUXv1qyAcHQ4ik8UTRL5bNKNmN80r_Xpzkbk/edit?gid=1774371473#gid=1774371473" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr class="month-row" data-month="july">
+                <td><b>EDM3 &mdash; Visual (Whole Webinar SET3)</b><br><span style="font-size:10px;color:var(--muted)">Webinar No-Show Email Visual EDM3</span></td>
+                <td>EDM Broadcast</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>447</td><td>167</td><td>13</td><td>37.4%</td><td>2.9%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1NmOyNo9YvJtUODrwIx8SOHWSK9quxNcO9tQU52RpdfE/edit?gid=1115540759#gid=1115540759" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr class="month-row" data-month="july">
+                <td><b>EDM3 &mdash; Visual (Whole Webinar SET4)</b><br><span style="font-size:10px;color:var(--muted)">Webinar No-Show Email Visual EDM3</span></td>
+                <td>EDM Broadcast</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>444</td><td>223</td><td>5</td><td>50.2%</td><td>1.1%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1xuuzvPp-oUjQA9VAGnGbEqhHHdTX64N6AcBYy4OO4PQ/edit?gid=320725763#gid=320725763" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr class="month-row" data-month="july">
+                <td><b>EventMobi vs Whova Visual 1 &mdash; SET1 (150 Accounts)</b><br><span style="font-size:10px;color:var(--muted)">Competitive comparison EDM</span></td>
+                <td>EDM Broadcast</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>399</td><td>181</td><td>5</td><td>45.4%</td><td>1.3%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1HDKiA0prKnyzypmyZTtxB7e2HpY_fz6s7MA5m0T6nRs/edit?gid=909314168#gid=909314168" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr class="month-row" data-month="july">
+                <td><b>EventMobi vs Whova Visual 1 &mdash; SET2 (150 Accounts)</b><br><span style="font-size:10px;color:var(--muted)">Competitive comparison EDM</span></td>
+                <td>EDM Broadcast</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>257</td><td>174</td><td>4</td><td>67.7%</td><td>1.6%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1XPkOgavHiDf10eU-rRsHz7oyx9ZAkcYGLRtLtbYYSCQ/edit?gid=66768279#gid=66768279" target="_blank">View &nearr;</a></td>
+              </tr>
+                            <tr style="background:var(--pagebg)"><td colspan="9" style="font-weight:700;color:var(--navy);font-size:12px">POST-WEBINAR 1:1 CAMPAIGNS</td></tr>
+              <tr>
+                <td><b>1:1 Outreach &mdash; Set 1 (Whole Webinar)</b><br><span style="font-size:10px;color:var(--muted)">EventMobi BadgeON&trade; No-Show Sequence</span></td>
+                <td>1:1 Email</td>
+                <td><span class="em-tag active"><span class="dot"></span> Active</span></td>
+                <td>636</td><td>239</td><td>194</td><td>37.6%</td><td>30.5%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1ODUyn-8o1_-VlJreWkV3WAC_J490eoHEgiVoogehxgI/edit?gid=1842782615#gid=1842782615" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>1:1 Outreach &mdash; Set 2 (Whole Webinar)</b><br><span style="font-size:10px;color:var(--muted)">EventMobi BadgeON&trade; No-Show Sequence</span> <span style="background:var(--green-light);color:var(--green-text);padding:1px 6px;border-radius:10px;font-size:9px;font-weight:700">MQL</span></td>
+                <td>1:1 Email</td>
+                <td><span class="em-tag active"><span class="dot"></span> Active</span></td>
+                <td>652</td><td>264</td><td>212</td><td>40.5%</td><td>32.5%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1TdpS3vyKOVBlYoW1qYPg1h7cGIkrgEfJ064gIK5zXgE/edit?gid=853545883#gid=853545883" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>1:1 Outreach &mdash; Set 3 (Whole Webinar)</b><br><span style="font-size:10px;color:var(--muted)">EventMobi BadgeON&trade; No-Show Sequence</span></td>
+                <td>1:1 Email</td>
+                <td><span class="em-tag active"><span class="dot"></span> Active</span></td>
+                <td>385</td><td>175</td><td>137</td><td>45.5%</td><td>35.6%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1Bd6A84Gg6c4K-YRWEyTsap6wmyT836QVK_TbUx3lDuE/edit?gid=376177056#gid=376177056" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>1:1 Outreach &mdash; Set 4 (Whole Webinar)</b><br><span style="font-size:10px;color:var(--muted)">EventMobi BadgeON&trade; No-Show Sequence</span></td>
+                <td>1:1 Email</td>
+                <td><span class="em-tag active"><span class="dot"></span> Active</span></td>
+                <td>390</td><td>198</td><td>161</td><td>50.8%</td><td>41.3%</td>
+                <td><a class="em-link" href="https://docs.google.com/spreadsheets/d/1IIC3khJT_F0JvSxHCPS33j-fWvAJGFFcDZTfzn6UTSo/edit?gid=1069460524#gid=1069460524" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr style="background:var(--pagebg)"><td colspan="9" style="font-weight:700;color:var(--navy);font-size:12px">LINKEDIN CAMPAIGN</td></tr>
+              <tr class="month-row is-active" data-month="june">
+                <td><b>LinkedIn Outreach</b><br><span style="font-size:10px;color:var(--muted)">Webinar Invite Opened and Clicked</span></td>
+                <td>LinkedIn</td>
+                <td><span class="em-tag active"><span class="dot"></span> Active</span></td>
+                <td>1,064 touches</td><td>12 accepted</td><td>2 replied</td><td>&mdash;</td><td>&mdash;</td>
+                <td><a class="em-link" href="https://eventmobi.s3.us-east-2.amazonaws.com/image__44__1783694143402_8wxc.png" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr class="month-row" data-month="july">
+                <td><b>LinkedIn Outreach</b><br><span style="font-size:10px;color:var(--muted)">Webinar Invite Opened and Clicked &middot; 2 leads</span></td>
+                <td>LinkedIn</td>
+                <td><span class="em-tag active"><span class="dot"></span> Active</span></td>
+                <td>&mdash;</td><td>18 accepted</td><td>2 replied</td><td>&mdash;</td><td>&mdash;</td>
+                <td><a class="em-link" href="https://eventmobi.s3.us-east-2.amazonaws.com/image__44__1783694143402_8wxc.png" target="_blank">View &nearr;</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+      
+
+    <!-- CAMPAIGNS TAB -->
+    <div id="campaigns" class="em-panel">
+
+      <div style="text-align:center;margin-bottom:24px">
+        <a class="em-dashboard-btn" href="https://eventmobi-campaign.vercel.app/" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          View Live Campaign Dashboard
+        </a>
+      </div>
+
+      <div class="em-card-grid">
+        <div class="em-card" style="background:var(--white);border:2px solid var(--pastel-blue2)">
+          <div class="em-card-header">
+            <div class="em-card-name">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.07 0l2-2a5 5 0 0 0-7.07-7.07l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.07 0l-2 2a5 5 0 0 0 7.07 7.07l1.5-1.5"/></svg>
+              EventMobi vs. Whova Comparison
+            </div>
+            <span class="em-tag ready month-inline is-active" data-month="june"><span class="dot"></span> Ready to Launch</span>
+            <span class="em-tag done month-inline" data-month="july"><span class="dot"></span> Live in July</span>
+          </div>
+          <div class="em-card-stats">
+            <div class="em-card-stat"><div class="n">9</div><div class="l">Assets Built</div></div>
+            <div class="em-card-stat"><div class="n">823</div><div class="l">Accounts Sourced</div></div>
+            <div class="em-card-stat"><div class="n">1,284</div><div class="l">Contacts w/ Email</div></div>
+          </div>
+          <div class="em-card-list">
+            <span class="check">&#10003;</span> Comparison landing page live<br>
+            <span class="check">&#10003;</span> 2 branded visual EDMs complete<br>
+            <span class="check">&#10003;</span> 4 personalised 1:1 pitch variants<br>
+            <span class="check">&#10003;</span> Calling script + branded 2-pager ready<br>
+            <span class="check">&#10003;</span> 523 of 823 accounts fully profiled
+          </div>
+          <div class="em-callout" style="margin-top:12px">
+            All creative, contact data and the landing page are complete &mdash; the only remaining step is scheduling the send.
+          </div>
+        </div>
+
+        <div class="em-card" style="background:var(--white);border:2px solid var(--pastel-amber)">
+          <div class="em-card-header">
+            <div class="em-card-name">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.5"/><circle cx="12" cy="12" r="2"/></svg>
+              ABX &mdash; Financial Services
+            </div>
+            <span class="em-tag active"><span class="dot"></span> In Process</span>
+          </div>
+          <div class="em-card-stats">
+            <div class="em-card-stat"><div class="n">2,588</div><div class="l">Net-New Prospects</div></div>
+            <div class="em-card-stat"><div class="n">2</div><div class="l">MQL (Warm)</div></div>
+            <div class="em-card-stat"><div class="n">1</div><div class="l">SQL</div></div>
+          </div>
+          <div class="em-card-list">
+            <span class="check">&#10003;</span> 4K-contact ABX Financial Services dataset fully worked (EDM3)<br>
+            <span class="check">&#10003;</span> Net-new list build of 2,588 contacts in process<br>
+            <span class="check">&#10003;</span> Melissa David (Brookfield) &mdash; Warm / MQL, High, meeting not yet scheduled<br>
+            <span class="check">&#10003;</span> Deanna Basso (Manulife) &mdash; Warm / MQL, High, thanks for recording<br>
+            <span class="check">&#10003;</span> Veronica Fendt (DentalMonitoring) &mdash; SQL, meeting Done Jul 15 3pm CST<br>
+            <span class="check">&#10003;</span> Next: enrich &amp; launch outreach to net-new list
+          </div>
+          <div class="em-callout amber" style="margin-top:12px">
+            Lead-gen focus: converting the existing Financial Services dataset into pipeline while the net-new list expands reach for the next wave.
+          </div>
+        </div>
+      </div>
+    </div>
+      
+
+    <!-- ASSETS TAB -->
+    <div id="assets" class="em-panel">
+
+      <div class="month-block is-active" data-month="june">
+      <div class="em-section">
+        <div class="em-section-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22V4"/><path d="M4 4h14l-2 4 2 4H4"/></svg>
+          Pre-Webinar Content Inventory
+          <span class="tag done">Complete</span>
+        </div>
+        <div class="em-table-wrap">
+          <table class="em-table">
+            <thead>
+              <tr><th>Asset</th><th>Campaign</th><th>Type</th><th>Count</th><th>Status</th><th>Note</th><th>Link</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Visual EDM 1</b></td>
+                <td>EDM 1 &mdash; Client Accounts Set 1</td>
+                <td>EDM</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Branded HTML launch invitation</td>
+                <td><a class="em-link" href="https://drive.google.com/file/d/1F8c5aif29vOIwlQxZWL4NEeQGn9rf1PT/view?usp=sharing" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Visual EDM 2 (Refresh)</b></td>
+                <td>EDM 4 &mdash; ICP Prospects</td>
+                <td>EDM</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Second wave &mdash; refreshed CTA</td>
+                <td><a class="em-link" href="https://drive.google.com/file/d/1W6XIdPqnzHbQBNDOuZd3G-uSXIrqizZx/view?usp=sharing" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Text-Based EDM</b></td>
+                <td>EDM 3 &mdash; ABX Financial</td>
+                <td>EDM</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Plain-text for high deliverability</td>
+                <td><a class="em-link" href="https://drive.google.com/file/d/18XZzM9JwqtW95dKzdCsGjAX1zw_E4Y3L/view?usp=sharing" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>1:1 Pitch Email Copy</b></td>
+                <td>1:1 Outreach &mdash; Sets 1, 2, 3</td>
+                <td>Email</td>
+                <td>3</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Per sender persona, all batches</td>
+                <td><a class="em-link" href="https://docs.google.com/document/d/1VCkrkiHkgJU7x5yLgXEMzEh78oQrFxmnL4nRtXpc0Us/edit?tab=t.0" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Email Signature HTML</b></td>
+                <td>All campaigns</td>
+                <td>Email</td>
+                <td>8</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>All 8 sender personas</td>
+                <td><a class="em-link" href="https://drive.google.com/drive/folders/1jS-_eDVcb84sqKZ5MzuPfkZFVFBMA4YB?usp=sharing" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>UTM Tracking Links</b></td>
+                <td>All campaigns</td>
+                <td>Visual</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Webinar &amp; registration page attribution</td>
+                <td><a class="em-link" href="https://docs.google.com/document/d/1xfwgTsxgiXIH6cQXcz7RD9CWUKtUZ4egU0Fk3goI33s/edit?tab=t.0" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Webinar Email Invitation</b></td>
+                <td>EDM Broadcast</td>
+                <td>Email</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Webinar-specific outreach creative</td>
+                <td><a class="em-link" href="https://drive.google.com/drive/u/0/folders/1F5sj8QuvY0FsHqtBHBdmTTPDvJhrM-Rp" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Calling pitch</b></td>
+                <td>Calling outreach</td>
+                <td>Call</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Calling outreach to clicked contacts</td>
+                <td><a class="em-link" href="https://docs.google.com/document/d/1CGOROSr-s7AoeoDxSl1Bg-vxvcwnxVZ5VdiYW-8n9_4/edit?tab=t.0" target="_blank">Open &nearr;</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="em-section">
+        <div class="em-section-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+          Post-Webinar Content Inventory
+          <span class="tag done">Complete</span>
+        </div>
+        <div class="em-table-wrap">
+          <table class="em-table">
+            <thead>
+              <tr><th>Asset</th><th>Campaign</th><th>Type</th><th>Count</th><th>Status</th><th>Note</th><th>Link</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Post Webinar Visual EDM 1</b></td>
+                <td>EDM 1 - Whole Webinar Data</td>
+                <td>Visual</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Branded HTML for No Show contacts</td>
+                <td><a class="em-link" href="https://drive.google.com/file/d/1ThVtK1C8hd_AobxELY7EYIzs3FoI8L_o/view?usp=sharing" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Post Webinar Visual EDM 2</b></td>
+                <td>EDM 2 - Whole Webinar Data</td>
+                <td>Visual</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Branded HTML for No Show contacts</td>
+                <td><a class="em-link" href="https://drive.google.com/drive/u/0/folders/1F5sj8QuvY0FsHqtBHBdmTTPDvJhrM-Rp" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Post Webinar 1:1 Pitch</b></td>
+                <td>1:1 Outreach - Whole Webinar Data</td>
+                <td>Email</td>
+                <td>4</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Plain text Pitch</td>
+                <td><a class="em-link" href="https://docs.google.com/document/d/1PuTcxRwqBSFqve_2ZStIVzdM6cfRuQ9O/edit?usp=sharing&ouid=117627370994822505511&rtpof=true&sd=true" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Post Webinar LinkedIn Pitch</b></td>
+                <td>LinkedIn Outreach - Webinar Invite Campaigns</td>
+                <td>LinkedIn</td>
+                <td>4</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>LinkedIn Outreach</td>
+                <td><a class="em-link" href="https://docs.google.com/document/d/12yThoEMSw1GcNW_iVfmCl8JEMFk6BxHgnIIUhH9SECU/edit?tab=t.0" target="_blank">Open &nearr;</a></td>
+              </tr>
+              
+              <tr>
+                <td><b>Calling pitch</b></td>
+                <td>Call outreach</td>
+                <td>Call</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Calling outreach for clicked contacts</td>
+                <td><a class="em-link" href="https://docs.google.com/document/d/1jrmyIe1jpvsW7biHzOF6sdovgEA5p7YibZrPlDxcRN0/edit?tab=t.2jtgsn6gh89u" target="_blank">Open &nearr;</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+
+      <div class="em-section">
+        <div class="em-section-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.07 0l2-2a5 5 0 0 0-7.07-7.07l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.07 0l-2 2a5 5 0 0 0 7.07 7.07l1.5-1.5"/></svg>
+          EventMobi vs Whova &mdash; Content Inventory
+          <span class="tag ready">Ready to Launch</span>
+        </div>
+        <div class="em-table-wrap">
+          <table class="em-table">
+            <thead>
+              <tr><th>Asset</th><th>Campaign</th><th>Type</th><th>Count</th><th>Status</th><th>Note</th><th>Link</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Eventmobi vs Whova Landing Page</b></td>
+                <td>Campaign yet to start</td>
+                <td>Landing Page</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Landing page for campaigns</td>
+                <td><a class="em-link" href="https://comparison-landing-page.vercel.app/" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Eventmobi vs Whova 1:1 Pitch</b></td>
+                <td>Campaign yet to start</td>
+                <td>Email</td>
+                <td>4</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>High deliverability Pitch</td>
+                <td><a class="em-link" href="https://docs.google.com/document/d/1kzNZtH1B0dzjifn03TnK_DtHt9I3qILZPLwCXDvk-sk/edit?tab=t.0" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Eventmobi vs Whova Calling Pitch</b></td>
+                <td>Campaign yet to start</td>
+                <td>Call</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>High deliverability calling Pitch</td>
+                <td><a class="em-link" href="https://docs.google.com/document/d/1qGF-CLoyRuyPBDuaqC_fi6fSy0h6hyYiywPCfJ-tLWs/edit?tab=t.0#heading=h.maarvvcqeeaw" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Eventmobi vs Whova 2 pager</b></td>
+                <td>Campaign yet to start</td>
+                <td>2 pager</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Branded 2 pager</td>
+                <td><a class="em-link" href="https://drive.google.com/drive/u/0/folders/12oJQbQL-Zt8BFV-NE30YaGGBC6oPas1g" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Eventmobi vs Whova Visual EDM 1</b></td>
+                <td>Campaign yet to start</td>
+                <td>Visual</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Branded HTML visual</td>
+                <td><a class="em-link" href="https://drive.google.com/drive/u/0/folders/1vdoqnMHxn3YNc1_9Ey7c0tV6-jucehIQ" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Eventmobi vs Whova Visual EDM 2</b></td>
+                <td>Campaign yet to start</td>
+                <td>Visual</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Branded HTML visual</td>
+                <td><a class="em-link" href="https://drive.google.com/drive/u/0/folders/1vdoqnMHxn3YNc1_9Ey7c0tV6-jucehIQ" target="_blank">Open &nearr;</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </div>
+
+      <div class="month-block" data-month="july">
+      <div class="em-section">
+        <div class="em-section-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22V4"/><path d="M4 4h14l-2 4 2 4H4"/></svg>
+          Pre-Webinar Content Inventory
+          <span class="tag done">Complete</span>
+        </div>
+        <div class="em-table-wrap">
+          <table class="em-table">
+            <thead>
+              <tr><th>Asset</th><th>Campaign</th><th>Type</th><th>Count</th><th>Status</th><th>Note</th><th>Link</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Visual EDM 1</b></td>
+                <td>EDM 1 &mdash; Client Accounts Set 1</td>
+                <td>EDM</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Branded HTML launch invitation</td>
+                <td><a class="em-link" href="https://drive.google.com/file/d/1F8c5aif29vOIwlQxZWL4NEeQGn9rf1PT/view?usp=sharing" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Visual EDM 2 (Refresh)</b></td>
+                <td>EDM 4 &mdash; ICP Prospects</td>
+                <td>EDM</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Second wave &mdash; refreshed CTA</td>
+                <td><a class="em-link" href="https://drive.google.com/file/d/1W6XIdPqnzHbQBNDOuZd3G-uSXIrqizZx/view?usp=sharing" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Text-Based EDM</b></td>
+                <td>EDM 3 &mdash; ABX Financial</td>
+                <td>EDM</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Plain-text for high deliverability</td>
+                <td><a class="em-link" href="https://drive.google.com/file/d/18XZzM9JwqtW95dKzdCsGjAX1zw_E4Y3L/view?usp=sharing" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>1:1 Pitch Email Copy</b></td>
+                <td>1:1 Outreach &mdash; Sets 1, 2, 3</td>
+                <td>Email</td>
+                <td>3</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Per sender persona, all batches</td>
+                <td><a class="em-link" href="https://docs.google.com/document/d/1VCkrkiHkgJU7x5yLgXEMzEh78oQrFxmnL4nRtXpc0Us/edit?tab=t.0" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Email Signature HTML</b></td>
+                <td>All campaigns</td>
+                <td>Email</td>
+                <td>8</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>All 8 sender personas</td>
+                <td><a class="em-link" href="https://drive.google.com/drive/folders/1jS-_eDVcb84sqKZ5MzuPfkZFVFBMA4YB?usp=sharing" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>UTM Tracking Links</b></td>
+                <td>All campaigns</td>
+                <td>Visual</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Webinar &amp; registration page attribution</td>
+                <td><a class="em-link" href="https://docs.google.com/document/d/1xfwgTsxgiXIH6cQXcz7RD9CWUKtUZ4egU0Fk3goI33s/edit?tab=t.0" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Webinar Email Invitation</b></td>
+                <td>EDM Broadcast</td>
+                <td>Email</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Webinar-specific outreach creative</td>
+                <td><a class="em-link" href="https://drive.google.com/drive/u/0/folders/1F5sj8QuvY0FsHqtBHBdmTTPDvJhrM-Rp" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Calling pitch</b></td>
+                <td>calling outreach</td>
+                <td>call</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Calling outreach to clicked contacts</td>
+                <td><a class="em-link" href="https://docs.google.com/document/d/1CGOROSr-s7AoeoDxSl1Bg-vxvcwnxVZ5VdiYW-8n9_4/edit?tab=t.0" target="_blank">Open &nearr;</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="em-section">
+        <div class="em-section-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22V4"/><path d="M4 4h14l-2 4 2 4H4"/></svg>
+          Post-Webinar Content Inventory
+          <span class="tag done">Complete</span>
+        </div>
+        <div class="em-table-wrap">
+          <table class="em-table">
+            <thead>
+              <tr><th>Asset</th><th>Campaign</th><th>Type</th><th>Count</th><th>Status</th><th>Note</th><th>Link</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Post Webinar Visual EDM 1</b></td>
+                <td>EDM 1 - Whole Webinar Data</td>
+                <td>Visual</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Branded HTML for No Show contacts</td>
+                <td><a class="em-link" href="https://drive.google.com/file/d/1ThVtK1C8hd_AobxELY7EYIzs3FoI8L_o/view?usp=sharing" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Post Webinar Visual EDM 2</b></td>
+                <td>EDM 2 - Whole Webinar Data</td>
+                <td>Visual</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Branded HTML for No Show contacts</td>
+                <td><a class="em-link" href="https://drive.google.com/drive/u/0/folders/1F5sj8QuvY0FsHqtBHBdmTTPDvJhrM-Rp" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Post Webinar Visual EDM 3</b></td>
+                <td>EDM 2 - Whole Webinar Data</td>
+                <td>Visual</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Branded HTML for No Show contacts</td>
+                <td><a class="em-link" href="https://drive.google.com/file/d/1R1QlBQ3xY0tm35osojA9sWTQZnMqZCKE/view?usp=sharing" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Post Webinar 1:1 Pitch</b></td>
+                <td>1:1 Outreach - Whole Webinar Data</td>
+                <td>Email</td>
+                <td>4</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Plain text Pitch</td>
+                <td><a class="em-link" href="https://docs.google.com/document/d/1haFgu6uOV0MFnUGc-Jdi7e1yzKmzIxyY5V0oDGGBbAg/edit?tab=t.0" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Post webinar 1:1 Pitch (additional 3 sequences)</b></td>
+                <td>1:1 Outreach - Whole Webinar Data</td>
+                <td>Email</td>
+                <td>3</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Plain text Pitch</td>
+                <td><a class="em-link" href="https://docs.google.com/document/d/1haFgu6uOV0MFnUGc-Jdi7e1yzKmzIxyY5V0oDGGBbAg/edit?tab=t.7d8v8glslqhr" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Post Webinar Linkedin Pitch</b></td>
+                <td>Linkedin Outreach - Webinar Invite Campaigns Opens and Clicks data</td>
+                <td>Linkedin</td>
+                <td>4</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Linkedin Outreach</td>
+                <td><a class="em-link" href="https://docs.google.com/document/d/12yThoEMSw1GcNW_iVfmCl8JEMFk6BxHgnIIUhH9SECU/edit?tab=t.0" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Campaigns Dashboard</b></td>
+                <td>All the campaigns reporting dashboard</td>
+                <td>Dashboard</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>All campaigns Reports Dashboard</td>
+                <td><a class="em-link" href="https://eventmobi-campaign.vercel.app/" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Calling pitch</b></td>
+                <td>Call outreach</td>
+                <td>Call</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Calling outreach for clicked contacts</td>
+                <td><a class="em-link" href="https://docs.google.com/document/d/1jrmyIe1jpvsW7biHzOF6sdovgEA5p7YibZrPlDxcRN0/edit?tab=t.2jtgsn6gh89u" target="_blank">Open &nearr;</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="em-section">
+        <div class="em-section-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22V4"/><path d="M4 4h14l-2 4 2 4H4"/></svg>
+          EventMobi vs Whova &mdash; Content Inventory
+          <span class="tag done">Complete</span>
+        </div>
+        <div class="em-table-wrap">
+          <table class="em-table">
+            <thead>
+              <tr><th>Asset</th><th>Campaign</th><th>Type</th><th>Count</th><th>Status</th><th>Note</th><th>Link</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Eventmobi vs Whova Landing Page</b></td>
+                <td>Campaign yet to start</td>
+                <td>Landing Page</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Landing page for campaigns</td>
+                <td><a class="em-link" href="https://drive.google.com/drive/folders/1J9PwDnqKlXjQnRht_ORrMsoHQ_ZgLURT?usp=sharing" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Eventmobi vs Whova 1:1 Pitch v1</b></td>
+                <td>Campaign yet to start</td>
+                <td>Email</td>
+                <td>6</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>High deliverability Pitch</td>
+                <td><a class="em-link" href="https://docs.google.com/document/d/1ukoLLSjaVJZU6d2RgJGCenmtsM0kwVnUsRu4hPVLSuw/edit?usp=sharing" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Eventmobi vs Whova 1:1 Pitch v2</b></td>
+                <td>Campaign yet to start</td>
+                <td>Email</td>
+                <td>8</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>High deliverability Pitch</td>
+                <td><a class="em-link" href="https://docs.google.com/document/d/10BAQSDoRZt441JS3cumRQw4nOOtwDhdwBpdv0t_Sxd4/edit?usp=sharing" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Eventmobi vs Whova Calling Pitch</b></td>
+                <td>Campaign yet to start</td>
+                <td>Call</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>High deliverability calling Pitch</td>
+                <td><a class="em-link" href="https://docs.google.com/document/d/1qGF-CLoyRuyPBDuaqC_fi6fSy0h6hyYiywPCfJ-tLWs/edit?tab=t.0#heading=h.ga46dnptohu9" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Eventmobi vs Whova 2 pager</b></td>
+                <td>Campaign yet to start</td>
+                <td>2 pager</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Branded 2 pager</td>
+                <td><a class="em-link" href="https://drive.google.com/file/d/1mRXkh81W34SrM3JnSClxfTEgZ02DF4Ab/view?usp=sharing" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Eventmobi vs Whova Visual EDM 1</b></td>
+                <td>Campaign yet to start</td>
+                <td>Visual</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Branded HTML visual</td>
+                <td><a class="em-link" href="https://drive.google.com/file/d/1zZYBhwbFCH0yY8ZEV7VNU8M_iMFTxFo7/view?usp=sharing" target="_blank">Open &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Eventmobi vs Whova Visual EDM 2</b></td>
+                <td>Campaign yet to start</td>
+                <td>Visual</td>
+                <td>1</td>
+                <td><span class="em-tag done"><span class="dot"></span> Complete</span></td>
+                <td>Branded HTML visual</td>
+                <td><a class="em-link" href="https://drive.google.com/file/d/1ugGyYo0EPD-m0aZNQMHeq3AjnLJ15e7-/view?usp=sharing" target="_blank">Open &nearr;</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+        <div class="em-total-banner" style="margin-top:10px">
+          52 Total Assets Delivered &mdash; 100% Complete
+        </div>
+      </div>
+
+    </div>
+
+    <!-- DATA TAB -->
+    <div id="data" class="em-panel">
+      
+
+      <div class="em-data-stats">
+        <div class="em-data-stat">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          <div class="em-data-stat-n">3,130</div>
+          <div class="em-data-stat-l">Accounts Sourced</div>
+        </div>
+        <div class="em-data-stat">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          <div class="em-data-stat-n">7,119</div>
+          <div class="em-data-stat-l">Contacts w/ Email</div>
+        </div>
+        <div class="em-data-stat">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <div class="em-data-stat-n">645</div>
+          <div class="em-data-stat-l">Contacts w/o Email</div>
+        </div>
+        <div class="em-data-stat">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <div class="em-data-stat-n">488</div>
+          <div class="em-data-stat-l">Phone Numbers Extracted</div>
+        </div>
+      </div>
+
+      <div class="em-section">
+        <div class="em-section-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
+          Data &amp; Prospecting Created
+          <span style="margin-left:auto;font-size:12px;color:var(--muted);font-weight:500">4 sourced datasets feeding all campaigns</span>
+        </div>
+        <div class="em-table-wrap">
+          <table class="em-table">
+            <thead>
+              <tr>
+                <th>Data Set</th>
+                <th>Status</th>
+                <th>Accounts</th>
+                <th>Contacts w/ Email</th>
+                <th>Without Email</th>
+                <th>Phone</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>[NEXSUS] 2026 ABX - Financial Services (4K Data)</b><br><span style="font-size:10px;color:var(--muted)">Client Contact Verify + Enrich</span></td>
+                <td><span class="em-tag done"><span class="dot"></span> Done</span></td>
+                <td>1,094</td>
+                <td>3,976</td>
+                <td>181 (bounce)</td>
+                <td>261</td>
+                <td><a class="em-link" href="https://nexuses.s3.us-east-2.amazonaws.com/SID_4K_CONTACT_1782214114409_g772.jpg" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>2026 ABX - Financial Services Webinar (AWARE STAGE)</b><br><span style="font-size:10px;color:var(--muted)">Client Account data</span></td>
+                <td><span class="em-tag done"><span class="dot"></span> Done</span></td>
+                <td>413</td>
+                <td>978</td>
+                <td>126</td>
+                <td>&mdash;</td>
+                <td><span style="font-size:11px;color:var(--muted)">Client Source File</span></td>
+              </tr>
+              <tr>
+                <td><b>EVENTMOBI CLIENT ICP Webinar DATA - NEXUSES Addon</b><br><span style="font-size:10px;color:var(--muted)">Nexuses Data</span></td>
+                <td><span class="em-tag done"><span class="dot"></span> Done</span></td>
+                <td>800</td>
+                <td>881</td>
+                <td>77</td>
+                <td>227</td>
+                <td><a class="em-link" href="https://nexuses.s3.us-east-2.amazonaws.com/EVENT_MOBI_ICP_1782214507043_ln3c.png" target="_blank">View &nearr;</a></td>
+              </tr>
+              <tr>
+                <td><b>Nexuses X 2026 Q3 EN Whova_All_Companies_Combined Contact</b><br><span style="font-size:10px;color:var(--muted)">Client Account</span></td>
+                <td><span class="em-tag done"><span class="dot"></span> Done</span></td>
+                <td>823</td>
+                <td>1,284</td>
+                <td>261</td>
+                <td>&mdash;</td>
+                <td><span style="font-size:11px;color:var(--muted)">Nexuses Sourced</span></td>
+              </tr>
+              <tr>
+                <td><b>@ABX List Creations (Net New Contacts)</b><br><span style="font-size:10px;color:var(--muted)">Client Account</span></td>
+                <td><span class="em-tag active"><span class="dot"></span> In Process</span></td>
+                <td>2,588</td>
+                <td>&mdash;</td>
+                <td>&mdash;</td>
+                <td>&mdash;</td>
+                <td><span style="font-size:11px;color:var(--muted)">In Progress</span></td>
+              </tr>
+              <tr>
+                <td><b>ALL PHONE NUMBER (Active)</b><br><span style="font-size:10px;color:var(--muted)">Phone extraction ongoing</span></td>
+                <td><span class="em-tag active"><span class="dot"></span> In Process</span></td>
+                <td>&mdash;</td>
+                <td>&mdash;</td>
+                <td>&mdash;</td>
+                <td>488</td>
+                <td><span style="font-size:11px;color:var(--muted)">Active Sheet</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="em-section">
+        <div class="em-section-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a13 13 0 0 1 0 18 13 13 0 0 1 0-18z"/></svg>
+          EventMobi Integration
+        </div>
+        <div class="em-chip-row">
+          <div class="em-chip">
+            <div class="em-chip-icon">&#127760;</div>
+            <div>
+              <b>4 branded domains</b>
+              <span>goeventmobi.com &middot; eventmobi.net &middot; eventmobi.events &middot; eventmobi.info</span>
+            </div>
+          </div>
+          <div class="em-chip">
+            <div class="em-chip-icon">&#128100;</div>
+            <div>
+              <b>8 sender personas</b>
+              <span>Warmed &amp; active across G Suite, Outlook, Cloudflare, AWS</span>
+            </div>
+          </div>
+          <div class="em-chip">
+            <div class="em-chip-icon">&#128197;</div>
+            <div>
+              <b>Webinar-native sequence</b>
+              <span>No-show follow-up built off EventMobi's own attendance data</span>
+            </div>
+          </div>
+          <div class="em-chip">
+            <div class="em-chip-icon">&#128202;</div>
+            <div>
+              <b>Live reporting</b>
+              <span>Real-time dashboard for EventMobi stakeholders</span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- PIPELINE TAB -->
+    <div id="pipeline" class="em-panel">
+
+      <div class="em-callout month-block" data-month="july" style="margin-bottom:18px">
+        <b>July lead pipeline:</b> Trigger &mdash; <b>2 MQL</b> &middot; <b>1 SQL</b>. Melissa David &amp; Deanna Basso (Warm / MQL) &middot; Veronica Fendt (SQL &middot; Meeting Done Jul 15).
+      </div>
+
+      <div class="em-chart-grid-2">
+        <div class="em-section">
+          <div class="em-section-title">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.5"/><circle cx="12" cy="12" r="2"/></svg>
+            Pipeline Funnel
+          </div>
+          <div class="em-funnel">
+            <div class="em-funnel-stage" style="width:100%;background:linear-gradient(90deg,#DBEAFE,#BFDBFE);color:var(--navy)">
+              <div>Contacts Reached<small>8,447 delivered</small></div>
+            </div>
+            <div class="em-funnel-connector"></div>
+            <div class="em-funnel-stage" style="width:80%;background:linear-gradient(90deg,#93C5FD,#60A5FA);color:var(--navy)">
+              <div>Engaged (Opened)<small>3,480 &middot; 41.2%</small></div>
+            </div>
+            <div class="em-funnel-connector"></div>
+            <div class="em-funnel-stage" style="width:60%;background:linear-gradient(90deg,#60A5FA,#3B82F6);color:#fff">
+              <div>Clicked &mdash; High Intent<small>1,006 &middot; 11.9%</small></div>
+            </div>
+            <div class="em-funnel-connector"></div>
+            <div class="em-funnel-stage" style="width:40%;background:linear-gradient(90deg,#3B82F6,#1D4ED8);color:#fff">
+              <div>Active 1:1 Outreach<small>10 named contacts</small></div>
+            </div>
+            <div class="em-funnel-connector"></div>
+            <div class="em-funnel-stage" style="width:28%;background:linear-gradient(90deg,#1D4ED8,#1A2B5E);color:#fff">
+              <div>Pipeline (CRM)<small>3 leads &middot; 2 MQL</small></div>
+            </div>
+            <div class="em-funnel-connector"></div>
+            <div class="em-funnel-stage" style="width:18%;background:linear-gradient(90deg,#1A2B5E,#0f172a);color:#fff">
+              <div>SQL &mdash; Demo<small>1 &middot; Done Jul 15</small></div>
+            </div>
+          </div>
+          <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:10px">Stage widths are scaled for legibility. Top three stages are send-level event counts; bottom three are unique named contacts.</p>
+        </div>
+
+        <div class="em-section">
+          <div class="em-section-title">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+            Pipeline Outcome
+            <span style="margin-left:auto;font-size:12px;color:var(--muted);font-weight:500">2 MQL &middot; 1 SQL &middot; Priority: High</span>
+          </div>
+          <div class="em-lead-grid">
+            <div class="em-lead-card sql">
+              <div class="em-lead-name">Veronica Fendt</div>
+              <div class="em-lead-role">Director of Events &middot; DentalMonitoring &middot; Medical Equipment Manufacturing</div>
+              <span class="em-lead-status sql">&#9679; SQL &middot; Meeting Done</span>
+              <div class="em-lead-meta">Interested in learning more &mdash; meeting Jul 15, 3:00 PM CST &middot; last contact Jul 9 (5 days) &middot; Outbound &middot; <a class="em-link" href="mailto:fendt@dental-monitoring.com">fendt@dental-monitoring.com</a> &middot; <a class="em-link" href="https://www.linkedin.com/in/veronicafendt/" target="_blank">LinkedIn &nearr;</a> &middot; <a class="em-link" href="https://dental-monitoring.com/" target="_blank">Website &nearr;</a></div>
+            </div>
+            <div class="em-lead-card warm">
+              <div class="em-lead-name">Melissa David</div>
+              <div class="em-lead-role">Event Operations Coordinator &middot; Brookfield &middot; Financial Services</div>
+              <span class="em-lead-status warm">&#9679; MQL &middot; Warm</span>
+              <div class="em-lead-meta">LinkedIn request accepted and responded to first message &middot; last contact Jul 10 (4 days) &middot; meeting not yet scheduled &middot; Outbound &middot; <a class="em-link" href="mailto:melissa.david@brookfield.com">melissa.david@brookfield.com</a> &middot; <a class="em-link" href="https://www.linkedin.com/in/melissa-f-david/" target="_blank">LinkedIn &nearr;</a> &middot; <a class="em-link" href="https://www.brookfield.com" target="_blank">Website &nearr;</a></div>
+            </div>
+            <div class="em-lead-card warm">
+              <div class="em-lead-name">Deanna (Marchi) Basso</div>
+              <div class="em-lead-role">Senior Event Planner &middot; Manulife &middot; Insurance</div>
+              <span class="em-lead-status warm">&#9679; MQL &middot; Warm</span>
+              <div class="em-lead-meta">LinkedIn request accepted and said thanks for the recording &middot; last contact Jul 14 (0 days) &middot; meeting not yet scheduled &middot; Outbound &middot; <a class="em-link" href="mailto:deanna_basso@manulife.ca">deanna_basso@manulife.ca</a> &middot; <a class="em-link" href="https://www.linkedin.com/in/deannabasso/" target="_blank">LinkedIn &nearr;</a> &middot; <a class="em-link" href="http://www.manulife.com/" target="_blank">Website &nearr;</a></div>
+            </div>
+          </div>
+          <div class="em-callout" style="margin-top:16px">
+            <b>In active outreach (not yet in CRM):</b> Lisa Murphy (ConnexPay), Scott Sandler (Nasdaq), Maddie Dukes (StepStone Group), Andrea Beach (Visa), Erin Sparks (Westfield), Kathleen Flanagan (Stifel Financial), Katelyn Brown (Prudential Financial), Crystal Infante (Capital Group) &mdash; all clicked and are being worked via direct call + LinkedIn.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="em-footer">
+    <span class="month-inline is-active" data-month="june">Nexuses &times; EventMobi &middot; Campaign Performance Report &middot; Confidential &mdash; for client reporting &middot; June 2026</span>
+    <span class="month-inline" data-month="july">Nexuses &times; EventMobi &middot; Campaign Performance Report &middot; Confidential &mdash; for client reporting &middot; July 2026</span>
+  </div>
+</div>
+
+<script>
+function switchTab(tabId) {
+  document.querySelectorAll('.em-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.em-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  event.target.closest('.em-tab').classList.add('active');
+}
+
+function applyMonth(month) {
+  document.querySelectorAll('[data-month]').forEach(function(el) {
+    var months = (el.getAttribute('data-month') || '').split(/\s+/);
+    var on = months.indexOf(month) !== -1;
+    el.classList.toggle('is-active', on);
+  });
+  var sel = document.getElementById('monthSelect');
+  if (sel && sel.value !== month) sel.value = month;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var sel = document.getElementById('monthSelect');
+  if (!sel) return;
+  sel.addEventListener('change', function() { applyMonth(sel.value); });
+  applyMonth(sel.value || 'june');
+});
+</script>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
